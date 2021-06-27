@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package infoGeneral;
 
 /**
  *
- * @author Medardo Garces
+ * @author danil
  */
-public class IntegranteBanda {
-    private String rolbanda;
+public enum RolBanda {
+    CANTANTE,
+    GUITARRISTA,
+    BAJISTA,
+    BATERISTA,
+    OTRO 
 }

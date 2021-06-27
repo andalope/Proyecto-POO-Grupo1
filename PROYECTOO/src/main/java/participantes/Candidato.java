@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package participantes;
 
 /**
  *
- * @author Medardo Garces
+ * @author danil
  */
-public class Participante5k {
-    private float tiempo;
+public class Candidato {
+    private int id;
+    private String nombre;
+    
 }

@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package participantes;
 
+import infoGeneral.RolBanda;
 /**
  *
- * @author Medardo Garces
+ * @author danil
  */
-public class Participante {
-    protected String id;
-    protected String nombre;
+public class IntegranteBanda extends Estudiante{
+    private RolBanda rol;
+    
 }
