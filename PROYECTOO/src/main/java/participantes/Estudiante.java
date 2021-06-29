@@ -5,13 +5,27 @@
  */
 package participantes;
 
-import infoGeneral.Carrera;
-import infoGeneral.Genero;
+
 /**
  *
  * @author danil
  */
+//La clase Estudiante es una sub clase de la clase candidato
 public class Estudiante extends Candidato{
-    private Genero genero;
-    private Carrera carrera;
-}
+    private String genero;
+    private String carrera;
+
+//metodo estudiante
+ public Estudiante(String genero, String carrera, int id, String nombre) {
+        super(id, nombre);
+        this.genero = genero;
+        this.carrera = carrera;
+    }
+ 
+ //sobre escritura del metodo estudiante
+public Estudiante(Estudiante estudiante){
+        super(estudiante.getId(), estudiante.getNombre()); //se usa super para poder usar los atributos y metodos de la clase padre Candidato
+        genero = estudiante.genero;
+        carrera = estudiante.carrera;
+    }
+}    

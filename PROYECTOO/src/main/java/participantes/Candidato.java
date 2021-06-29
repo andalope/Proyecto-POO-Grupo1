@@ -9,8 +9,23 @@ package participantes;
  *
  * @author danil
  */
-public class Candidato {
+//se define la clase candidato como abstracta
+public abstract class Candidato {
     private int id;
     private String nombre;
+    
+public Candidato(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+//getters
+public int getId() {
+        return id;
+    }
+    
+public String getNombre() {
+        return nombre;
+    }
     
 }
