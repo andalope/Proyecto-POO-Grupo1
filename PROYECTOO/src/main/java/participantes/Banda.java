@@ -13,4 +13,7 @@ public class Banda extends Candidato {
     private String cancion;
     private IntegranteBanda[] integrantes;
     
+public Banda(int id, String nombre) {
+    super(id, nombre);
+}   
 }

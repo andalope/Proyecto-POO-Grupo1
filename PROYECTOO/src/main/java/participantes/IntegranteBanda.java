@@ -13,4 +13,9 @@ import infoGeneral.RolBanda;
 public class IntegranteBanda extends Estudiante{
     private RolBanda rol;
     
+public IntegranteBanda(RolBanda rol, String genero, String carrera, int id, String nombre) {
+    super(genero, carrera, id, nombre);
+    this.rol = rol;
+}
+    
 }

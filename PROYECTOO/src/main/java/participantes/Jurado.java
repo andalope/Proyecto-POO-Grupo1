@@ -11,4 +11,8 @@ package participantes;
  */
 public class Jurado extends Candidato{
     private String bio;
+    
+public Jurado(int id, String nombre) {
+    super(id, nombre);
+}
 }
