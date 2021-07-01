@@ -19,6 +19,7 @@ public class Main {
         // TODO code application logic here
         Sistema sistema = Sistema.getInstance();
         Scanner sc = sistema.getScanner();
+                
         Competencia[] tipos = new Competencia[3];
         tipos[0] = new Carrera5K();
         tipos[1] = new CompetenciaBanda();
