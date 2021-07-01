@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Clase padre de la que derivan todas las competiciones
 package eventos;
 
 import java.time.LocalDate;
@@ -30,7 +26,7 @@ public Competencia() {
         
 }
 
-//sobrecarga del metodo Competencia
+//sobrecarga del metodo Competencia (CONSTRUCTOR)
 public Competencia(int id, LocalDate fecha, LocalTime hora, String[] premios) {
     this.id = id;
     this.fecha = fecha;
@@ -40,7 +36,7 @@ public Competencia(int id, LocalDate fecha, LocalTime hora, String[] premios) {
     listaParticipantes = new ArrayList<>();
     sistema = Sistema.getInstance();
     }
-    
+//sobrecarga del método Competencia que inclute la variable que indica si la competencia ha finalizado
 public Competencia(int id, LocalDate fecha, LocalTime hora, String[] premios, boolean terminado) {
     this.id = id;
     this.fecha = fecha;
