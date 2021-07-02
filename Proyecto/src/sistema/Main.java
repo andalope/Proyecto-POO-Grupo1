@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistema;
+
 import eventos.Carrera5K;
 import eventos.Competencia;
 import eventos.CompetenciaBanda;
 import eventos.TorneoVideojuego;
 import java.util.Scanner;
 
-/**
- *
- * @author danil
- */
+
 public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
         Sistema sistema = Sistema.getInstance();
         Scanner sc = sistema.getScanner();
-                
         Competencia[] tipos = new Competencia[3];
         tipos[0] = new Carrera5K();
         tipos[1] = new CompetenciaBanda();
@@ -28,7 +19,8 @@ public class Main {
         int opcion;
         do{
             sistema.presentarSistema();
-            opcion = Integer.parseInt(sc.nextLine());
+            opcion = sc.nextInt();
+            sc.nextLine();
             System.out.println("");
             if (opcion != 4) {
                 
@@ -56,7 +48,7 @@ public class Main {
                     opcionSeccion = Integer.parseInt(sc.nextLine());
                     System.out.println("");
                     Competencia actual;
-                    int id;
+                    String id;
                     
                     switch(opcionSeccion) {
                         case 1:
@@ -64,7 +56,7 @@ public class Main {
                             break;
                         case 2:
                             sistema.opcionDos();
-                            id = Integer.parseInt(sc.nextLine());
+                            id = sc.nextLine();
                             actual = sistema.buscarCompetencia(id);
                             if (actual != null) {
                                 sistema.registrarParticipantes(actual);
@@ -74,7 +66,7 @@ public class Main {
                             break;
                         case 3:
                             sistema.opcionTres();
-                            id = Integer.parseInt(sc.nextLine());
+                             id = sc.nextLine();
                             actual = sistema.buscarCompetencia(id);
                             if (actual != null) {
                                 sistema.registrarGanadores(actual);
@@ -91,6 +83,6 @@ public class Main {
             }
             
         } while (opcion != 4);
-        
- }        
+        sc.close();
+    }
 }

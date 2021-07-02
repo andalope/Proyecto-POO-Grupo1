@@ -1,4 +1,4 @@
-//Clase padre de la que derivan todas las competiciones
+
 package eventos;
 
 import java.time.LocalDate;
@@ -6,96 +6,112 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import sistema.Sistema;
 import participantes.Candidato;
-/**
- *
- * @author danil
- */
-//competencia es una clase abstracta
+import participantes.Estudiante;
+
+
 public abstract class Competencia {
-//declaracion de datos y arraylists
-private int id;
-private LocalDate fecha;
-private LocalTime hora;
-private String[] premios;
-protected Candidato[] ganadores;
-protected ArrayList<Candidato> listaParticipantes;
-protected Sistema sistema;
-protected boolean terminado;
 
-public Competencia() {
-        
-}
+    private String id;
+    private LocalDate fecha;
+    private LocalTime hora;
+    private String[] premios;
+    protected Candidato[] ganadores;
+    protected ArrayList<Candidato> listaParticipantes;
+    protected Sistema sistema;
+    protected boolean terminado;
 
-//sobrecarga del metodo Competencia (CONSTRUCTOR)
-public Competencia(int id, LocalDate fecha, LocalTime hora, String[] premios) {
-    this.id = id;
-    this.fecha = fecha;
-    this.hora = hora;
-    this.premios = premios;
-    ganadores = new Candidato[3];
-    listaParticipantes = new ArrayList<>();
-    sistema = Sistema.getInstance();
-    }
-//sobrecarga del método Competencia que inclute la variable que indica si la competencia ha finalizado
-public Competencia(int id, LocalDate fecha, LocalTime hora, String[] premios, boolean terminado) {
-    this.id = id;
-    this.fecha = fecha;
-    this.hora = hora;
-    this.premios = premios;
-    ganadores = new Candidato[3];
-    listaParticipantes = new ArrayList<>();
-    this.terminado = terminado;
-    sistema = Sistema.getInstance();
+    public Competencia() {
+        sistema = Sistema.getInstance();
     }
 
-//metodos abstractos que variaran en cada sub clase de Competencia
-public abstract void registarParticipante();
-    
-public abstract Candidato buscarParticipante(int id);
-    
-public abstract boolean ganadorRepetido(int id);
+    public Competencia(String id, LocalDate fecha, LocalTime hora, String[] premios) {
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.premios = premios;
+        ganadores = new Candidato[3];
+        listaParticipantes = new ArrayList<>();
+        sistema = Sistema.getInstance();
+        terminado = false;
+    }
 
-public abstract void registrarGanadores();
+    public Competencia(String id, LocalDate fecha, LocalTime hora, String[] premios, boolean terminado) {
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.premios = premios;
+        ganadores = new Candidato[3];
+        listaParticipantes = new ArrayList<>();
+        this.terminado = terminado;
+        sistema = Sistema.getInstance();
+    }
 
-public abstract void presentarMenu();
-    
-public abstract void opcionUno();
-    
-public abstract void opcionDos();
-    
-public abstract void opcionTres();
+    public Candidato buscarParticipante(String id) {
+        for (Candidato c : listaParticipantes) {
+            if (c.getId().equals(id)) {
+                return c;
+            }
+        }
+        return null;
+    }
 
-//getters
-public int getId() {
+    public boolean ganadorRepetido(String id) {
+        for (Candidato c: ganadores) {
+            if (c != null && c.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String toString() {
+        return getId().substring(2) + " " + getFecha() + " " + getHora() + " " + listaParticipantes.size();
+    }
+
+    public abstract void addParticipante(Candidato c);
+
+    public abstract void registarParticipante();
+
+    public abstract void registrarGanadores();
+
+    public abstract void presentarMenu();
+
+    public abstract void opcionUno();
+
+    public abstract void opcionDos();
+
+    public abstract void opcionTres();
+
+    public String getId() {
         return id;
-}
+    }
 
-public LocalDate getFecha() {
-    return fecha;
-}
+    public LocalDate getFecha() {
+        return fecha;
+    }
 
-public LocalTime getHora() {
-    return hora;
-}
+    public LocalTime getHora() {
+        return hora;
+    }
 
-public String[] getPremios() {
-    return premios;
-}
+    public String[] getPremios() {
+        return premios;
+    }
 
-public Candidato[] getGanadores() {
-    return ganadores;
-}
+    public Candidato[] getGanadores() {
+        return ganadores;
+    }
 
-public ArrayList<Candidato> getListaParticipantes() {
-    return listaParticipantes;
-}
+    public ArrayList<Candidato> getListaParticipantes() {
+        return listaParticipantes;
+    }
 
-public boolean isTerminado() {
-    return terminado;
-}
+    public boolean isTerminado() {
+        return terminado;
+    }
 
-public void setTerminado(boolean terminado) {
-    this.terminado = terminado;
-}    
+    public void setTerminado(boolean terminado) {
+        this.terminado = terminado;
+    }
 
 }

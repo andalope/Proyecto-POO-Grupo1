@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sistema;
 
 import java.io.BufferedReader;
@@ -12,11 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import participantes.Estudiante;
-/**
- *
- * @author danil
- */
-//clase creada para leer el csv
+
+
 public class Reader {
 
     public ArrayList<Estudiante> cargarEstudiantes() {
@@ -32,7 +25,7 @@ public class Reader {
             {
                 String[] info = linea.split(",");//separar los datos por coma
                 //crear objeto y agregar a la lista
-                listaEstudiantes.add(new Estudiante(info[2], info[3], Integer.parseInt(info[0]), info[1]));
+                listaEstudiantes.add(new Estudiante(info[2], info[3], info[0], info[1]));
 
             }
         } catch (FileNotFoundException ex) {
@@ -51,5 +44,4 @@ public class Reader {
         return listaEstudiantes;
 
     }
-    
 }
