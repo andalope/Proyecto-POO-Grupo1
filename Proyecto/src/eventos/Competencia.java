@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import sistema.Sistema;
 import participantes.Candidato;
-import participantes.Estudiante;
 
 
 public abstract class Competencia {
@@ -65,10 +64,13 @@ public abstract class Competencia {
     }
 
     public String toString() {
-        return getId().substring(2) + " " + getFecha() + " " + getHora() + " " + listaParticipantes.size();
+        return getId().substring(2) + "\t" + getFecha() + "\t" + getHora();
     }
 
-    public abstract void addParticipante(Candidato c);
+    public void addParticipante(Candidato c) {
+        listaParticipantes.add(c);
+    }
+
 
     public abstract void registarParticipante();
 

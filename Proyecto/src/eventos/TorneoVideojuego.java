@@ -85,38 +85,35 @@ public class TorneoVideojuego extends Competencia{
 
     @Override
     public void presentarMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Estas dentro de la seccion Torneo Videojuegos");
+        sistema.competenciasCreadas(this);
+        System.out.println("");
+
+        System.out.println("1. Crear nuevo torneo");
+        System.out.println("2. Registrar participantes");
+        System.out.println("3. Registrar ganadores");
+        System.out.println("4. Volver al menu principal");
+        System.out.println("");
+        System.out.print("Escoge una opcion: ");
     }
 
     @Override
     public void opcionUno() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("No debe implementarse. Presion ENTER para volver al menu principal");
+        System.out.println("");
     }
 
     @Override
     public void opcionDos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("Ingrese ID del torneo: ");
     }
 
     @Override
     public void opcionTres() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("Ingrese ID del torneo: ");
     }
 
     @Override
-    public Candidato buscarParticipante(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean ganadorRepetido(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void addParticipante(Candidato e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-}
+    public String toString() {
+        return super.toString() + "\t" + nombreVideojuego;
+    }    }

@@ -19,35 +19,40 @@ public class CompetenciaBanda extends Competencia {
     public CompetenciaBanda() {
         super();
     }
-//Constructor de competencias de bandas
+
     public CompetenciaBanda(String id, LocalDate fecha, LocalTime hora, String[] premios, Jurado[] jurados) {
         super(id, fecha, hora, premios);
         this.jurados = jurados;
     }
-//Método para registrar jurados
+    
+    public CompetenciaBanda(String id, LocalDate fecha, LocalTime hora, String[] premios, Jurado[] jurados, boolean terminado) {
+        super(id, fecha, hora, premios, terminado);
+        this.jurados = jurados;
+    }
+
     private Jurado[] registrarJurados() {
         Jurado[] juradoTmp = new Jurado[3];
         System.out.println("Jurados");
         int i = 0;
         do {
-            System.out.println("Informacion del jurado #" + (i + 1));//El número del jurado es i+1 porque las posiciones del arreglo empiezan dede 0 
+            System.out.println("Informacion del jurado #" + (i + 1));
             System.out.print("ID: ");
-            String id = sistema.getScanner().nextLine();//Se ingresa por teclado el ID del jurado
+            String id = sistema.getScanner().nextLine();
 
-            if (juradoRepetido(id, juradoTmp)) {//Si el ID ingresado ya está dentro del arreglo de jurados, no permite que se vuelva a registrar
+            if (juradoRepetido(id, juradoTmp)) {
                 System.out.println("Jurado no existe o ya incluido");
             } else {
-                System.out.print("Nombre: ");//Si el ID aún no ha sido registrado solicita nombre y una pequeña descripción 
+                System.out.print("Nombre: ");
                 String nombre = sistema.getScanner().nextLine();
                 System.out.print("Bio: ");
                 String bio = sistema.getScanner().nextLine();
-                juradoTmp[i] = new Jurado(id, nombre, bio);//Adjunta un nuevo jurado a la lista de jurados con el ID, nombre y descripción
+                juradoTmp[i] = new Jurado(id, nombre, bio);
                 i++;
             }
-        } while (i < juradoTmp.length);//El proceso mencionado ocurre hasta que se registren 3 jurados
+        } while (i < juradoTmp.length);
         return juradoTmp;
     }
-//Método verificador de jurados repetidos
+
     private boolean juradoRepetido(String id, Jurado[] juradosActuales) {
         for (int i = 0; i < juradosActuales.length; i++) {
             if (juradosActuales[i] != null && juradosActuales[i].getId().equals(id)) {
@@ -56,7 +61,7 @@ public class CompetenciaBanda extends Competencia {
         }
         return false;
     }
-//Método verificador de integrantes de banda repetidos
+
     private boolean integranteRepetido(String id, IntegranteBanda[] lista) {
         for (IntegranteBanda ib : lista) {
             if (ib != null && ib.getId().equals(id)) {
@@ -65,11 +70,11 @@ public class CompetenciaBanda extends Competencia {
         }
         return false;
     }
-//Método para agregar integrante a una banda
-    private IntegranteBanda[] addIntegrantes(int num) {
+
+    private IntegranteBanda[] crearIntegrantes(int num) {
         IntegranteBanda[] lista = new IntegranteBanda[num];
         int contador = 0;
-        do{
+        do {
             System.out.print("ID Integrante " + (contador + 1) + ": ");
             String id = sistema.getScanner().nextLine();
             Estudiante e = sistema.buscarEstudiante(id);
@@ -85,32 +90,44 @@ public class CompetenciaBanda extends Competencia {
         } while (contador < num);
         return lista;
     }
-//Sobreescritura de método para registrar participante a la competencia
+
     @Override
     public void registarParticipante() {
         System.out.println("Registro de bandas");
-        String continuar = "S";//   Condición para que continúe el funcionamiento del ciclo while
+        String continuar = "S";
         do {
             System.out.print("Nombre de la banda: ");
-            String nombre = sistema.getScanner().nextLine();//Se ingresa el nombre de la banda
+            String nombre = sistema.getScanner().nextLine();
 
-            System.out.print("Cancion a interpretar: ");
-            String cancion = sistema.getScanner().nextLine();// Se ingresa la canción que interpretarán
+            Candidato c = buscarParticipante(nombre);
 
-            System.out.print("¿Cuantos integrantes?: ");
-            int num = sistema.getScanner().nextInt();//Se ingresa el número de integrantes
-            sistema.getScanner().nextLine();
-            IntegranteBanda[] lista = addIntegrantes(num);
-            listaParticipantes.add(new Banda(sistema.generarIdBanda(), nombre, cancion, lista));//Se le genera un ID a la banda registrada y se añade la información a la lista de participantes
-            continuar = sistema.getScanner().nextLine();//Se pregunta si se desea continuar registrando bandas o no
-        } while(!continuar.equals("N"));//El proceso se repetirá mientras la variable continuar sea distinta de N
+            if (c == null) {
+                System.out.print("Cancion a interpretar: ");
+                String cancion = sistema.getScanner().nextLine();
+
+                System.out.print("¿Cuantos integrantes?: ");
+                int num = sistema.getScanner().nextInt();
+                sistema.getScanner().nextLine();
+
+                IntegranteBanda[] lista = crearIntegrantes(num);
+                Banda b = new Banda(sistema.generarIdBanda(), nombre, cancion, lista);
+                addParticipante(b);
+                System.out.println("");
+                
+                System.out.println("¿Desea agregar otra banda? (S/N)");
+                continuar = sistema.getScanner().nextLine();
+            } else {
+                System.out.println("Banda ya registrada");
+                System.out.println("");
+            }
+        } while (!continuar.equals("N"));
     }
-//Método para registrar ganadores (no se debe implementar)
+
     @Override
     public void registrarGanadores() {
         //No aplica
     }
-//Método que presenta el menú de opciones de la competencia de bandas
+
     @Override
     public void presentarMenu() {
         System.out.println("Estas dentro de la seccion Bandas Musicales");
@@ -124,7 +141,7 @@ public class CompetenciaBanda extends Competencia {
         System.out.println("");
         System.out.print("Escoge una opcion: ");
     }
-//sobreescritura que presenta la opción de creación de bandas
+
     @Override
     public void opcionUno() {
         System.out.println("Creación de bandas musicales");
@@ -132,31 +149,24 @@ public class CompetenciaBanda extends Competencia {
         LocalTime hora = Utilitarios.obtenerHora();
         String[] premios = Utilitarios.registrarPremios();
         Jurado[] juradosEventos = registrarJurados();
-//Se crea la competencia de bandas con la fecha y hora en la que se realizará, sus jurados y los premios que habrán
+
         sistema.addCompetencia(new CompetenciaBanda(sistema.generarIdCompetencia(), fecha, hora, premios, juradosEventos));
 
         System.out.println("");
 
     }
-//Opción 2 que nos lleva al método que registra bandas
+
     @Override
     public void opcionDos() {
-        System.out.println("");
-
-        System.out.print("Ingrese ID: ");
+        System.out.print("Ingrese ID del torneo: ");
     }
-//Opción 3 que nos permite registrar ganadores (no se debe desarrollar)
+
     @Override
     public void opcionTres() {
-        System.out.println("No aplica");
+        System.out.println("No debe implementarse. Presion ENTER para volver al menu principal");
         System.out.println("");
     }
-//Sobreescritura del método añadir participante
-    @Override
-    public void addParticipante(Candidato c) {
-        
-    }
-//Sobreescritura del método para buscar paticipante
+
     @Override
     public Candidato buscarParticipante(String nombre) {
         for (Candidato c : listaParticipantes) {
@@ -167,4 +177,8 @@ public class CompetenciaBanda extends Competencia {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "\t" + listaParticipantes.size();
+    }
 }

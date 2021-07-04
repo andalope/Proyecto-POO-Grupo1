@@ -4,11 +4,15 @@ package sistema;
 import eventos.Carrera5K;
 import eventos.Competencia;
 import eventos.CompetenciaBanda;
+import eventos.TorneoVideojuego;
+import static infoGeneral.RolBanda.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import participantes.Banda;
 import participantes.Estudiante;
+import participantes.IntegranteBanda;
 import participantes.Jurado;
 
 
@@ -66,11 +70,45 @@ public class Sistema {
         lista[1] = new Jurado("2", "Juan", "Sin Bio");
         lista[2] = new Jurado("3", "Jaime", "Sin Bio");
         
-        Competencia c3 = new CompetenciaBanda(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios, lista);
+        IntegranteBanda[] intBanda1 = new IntegranteBanda[2];
+        intBanda1[0] = new IntegranteBanda(buscarEstudiante("202007290"), GUITARRISTA);
+        intBanda1[1] = new IntegranteBanda(buscarEstudiante("201811411"), OTRO);
+        Banda b1 = new Banda(generarIdBanda(), "Los chicos que lloran", "Olvidala mejor", intBanda1);
+        
+        IntegranteBanda[] intBanda2 = new IntegranteBanda[2];
+        intBanda2[0] = new IntegranteBanda(buscarEstudiante("201902996"), BATERISTA);
+        intBanda2[1] = new IntegranteBanda(buscarEstudiante("201811411"), GUITARRISTA);
+        Banda b2 = new Banda(generarIdBanda(), "Don Medardo y su orquesta", "Cumbia chonera", intBanda2);
+        
+        Competencia c3 = new CompetenciaBanda(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios, lista, true);
+        c3.addParticipante(b1);
+        c3.addParticipante(b2);
+        
+        
+        Competencia c4 = new CompetenciaBanda(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios, lista);
+        c4.addParticipante(b1);
+        c4.addParticipante(b2);
+        
+        Competencia c5 = new TorneoVideojuego(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios, "ABC", true);
+        c5.addParticipante(buscarEstudiante("202002028"));
+        c5.addParticipante(buscarEstudiante("201811411"));
+        c5.addParticipante(buscarEstudiante("201902996"));
+        c5.addParticipante(buscarEstudiante("200900850"));
+        c5.addParticipante(buscarEstudiante("202007290"));
+        c5.addParticipante(buscarEstudiante("201812302"));
+        
+        Competencia c6 = new TorneoVideojuego(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios, "To leave");
+        c6.addParticipante(buscarEstudiante("202002028"));
+        c6.addParticipante(buscarEstudiante("201811411"));
+        c6.addParticipante(buscarEstudiante("201902996"));
+        c6.addParticipante(buscarEstudiante("200900850"));
         
         listaCompetencia.add(c1);
         listaCompetencia.add(c2);
         listaCompetencia.add(c3);
+        listaCompetencia.add(c4);
+        listaCompetencia.add(c5);
+        listaCompetencia.add(c6);
     }
 
     public String generarIdCompetencia() {
