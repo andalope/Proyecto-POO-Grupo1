@@ -10,10 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-import participantes.Banda;
-import participantes.Estudiante;
-import participantes.IntegranteBanda;
-import participantes.Jurado;
+import participantes.*;
 
 
 public class Sistema {
@@ -38,12 +35,11 @@ public class Sistema {
     public static Sistema getInstance() {
         if (sistema == null) {
             sistema = new Sistema();
-            sistema.inicializar();
         } 
         return sistema;
     }
 
-    private void inicializar() {
+    public void inicializar() {
         Reader rd = new Reader();
         listaEstudiante = rd.cargarEstudiantes();
         String[] premios = new String[3];
@@ -51,19 +47,19 @@ public class Sistema {
             premios[i] = "Se va a otorgar una medalla y $" + 50*(i+1);
         }
         Competencia c1 = new Carrera5K(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios, true);
-        c1.addParticipante(buscarEstudiante("202002028"));
-        c1.addParticipante(buscarEstudiante("201811411"));
-        c1.addParticipante(buscarEstudiante("201902996"));
-        c1.addParticipante(buscarEstudiante("200900850"));
-        c1.addParticipante(buscarEstudiante("202007290"));
-        c1.addParticipante(buscarEstudiante("201812302"));
+        c1.addParticipante(new Participante5K(buscarEstudiante("202002028")));
+        c1.addParticipante(new Participante5K(buscarEstudiante("201811411")));
+        c1.addParticipante(new Participante5K(buscarEstudiante("201902996")));
+        c1.addParticipante(new Participante5K(buscarEstudiante("200900850")));
+        c1.addParticipante(new Participante5K(buscarEstudiante("202007290")));
+        c1.addParticipante(new Participante5K(buscarEstudiante("201812302")));
         
         Competencia c2 = new Carrera5K(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios);
-        c2.addParticipante(buscarEstudiante("202002028"));
-        c2.addParticipante(buscarEstudiante("201811411"));
-        c2.addParticipante(buscarEstudiante("201902996"));
-        c2.addParticipante(buscarEstudiante("200900850"));
-        c2.addParticipante(buscarEstudiante("202007290"));
+        c2.addParticipante(new Participante5K(buscarEstudiante("202002028")));
+        c2.addParticipante(new Participante5K(buscarEstudiante("201811411")));
+        c2.addParticipante(new Participante5K(buscarEstudiante("201902996")));
+        c2.addParticipante(new Participante5K(buscarEstudiante("200900850")));
+        c2.addParticipante(new Participante5K(buscarEstudiante("202007290")));
         
         Jurado[] lista = new Jurado[3];
         lista[0] = new Jurado("1", "Jose", "Sin Bio");

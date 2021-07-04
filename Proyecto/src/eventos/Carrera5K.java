@@ -24,14 +24,7 @@ public class Carrera5K extends Competencia {
         super(id, fecha, hora, premios, terminado);
     }
     
-
-    @Override
-    public void addParticipante(Candidato e) {
-        listaParticipantes.add(new Participante5K((Estudiante) e));
-    }
-
-
-//Método que presenta el menú de opciones para las competecias de Carreras5K
+    //Método que presenta el menú de opciones para las competecias de Carreras5K
     @Override
     public void presentarMenu() {
         System.out.println("Estas dentro de la seccion Carreras 5K");
@@ -47,6 +40,7 @@ public class Carrera5K extends Competencia {
         System.out.println("");
         System.out.print("Escoge una opcion: ");
     }
+
 //Método que registrar participantes que quieran participar en Carreras5K
     @Override
     public void registarParticipante() {
@@ -60,21 +54,25 @@ public class Carrera5K extends Competencia {
                 System.out.print("ID del estudiante: ");
                 id = sistema.getScanner().nextLine();//Se obtiene el Id del estudiante
 
-                Estudiante e = sistema.buscarEstudiante(id);//Se verifica si el ID ingresado es vàlido
+                Estudiante e = sistema.buscarEstudiante(id);//Se verifica si el ID ingresado es válido
                 Candidato repetido = buscarParticipante(id);//Verifica si el ID ya ha sido registrado
 
                 if (id.equals("0")) {
                     System.out.println("Volviendo al menu principal");
                 } else if (e == null || repetido != null) {//Si el ID ya fue registrado o no es vàlido, no registra a ese participante
                     System.out.println("Id no existe o estudiante ya registrado");
+                    System.out.println("");
                 } else {//Si el ID es vàlido y no se ha ingresado antes, registra al participante
-                    addParticipante(e);
-                    System.out.println("Estudiante " + e.getNombre() + " registrado");
+                    Participante5K p = new Participante5K(e);
+                    addParticipante(p);
+                    System.out.println(" Estudiante " + e + " registrado");
+                    System.out.println("");
                 }
             } while (!id.equals("0"));
         }
     }
-//Método que registra los ganadores de una Carrera 
+
+//Método que registra los ganadores de una Carrera    
     @Override
     public void registrarGanadores() {
         if (terminado) {//Si la carrera ya ha finalizado imprime mensaje y no permite modificaciones
@@ -87,13 +85,16 @@ public class Carrera5K extends Competencia {
                 System.out.print("ID: ");
                 String id = sistema.getScanner().nextLine();//Se ingresa el ID del participante
 
+
                 Participante5K p = (Participante5K) buscarParticipante(id);//Verifica si el ID ingresado realmente pertenece a un participante
 
                 if (p == null || ganadorRepetido(id)) {//Verifica si el ID no existe o si ese participante ya está en el podio de ganadores
                     System.out.println("Id no existe o ganador ya incluido");
                 } else {
                     ganadores[i] = p;//Si el ID es válido, se registra el tiempo que realizó cada uno de los miembros del podio
+                    System.out.println("Usar coma para el ingreso del tiempo ejemplo: 14,5");
                     System.out.print("Tiempo: ");
+                    
                     double tiempo = sistema.getScanner().nextDouble();
                     sistema.getScanner().nextLine();
                     p.setTiempo(tiempo);
@@ -108,10 +109,9 @@ public class Carrera5K extends Competencia {
 
     }
 
-//Métodos que indican la opción seleccionada
     @Override
     public void opcionUno() {
-        System.out.println("No debe implementarse");
+            System.out.println("No debe implementarse");
         System.out.println("");
     }
 
@@ -123,6 +123,11 @@ public class Carrera5K extends Competencia {
     @Override
     public void opcionTres() {
         System.out.print("Ingrese ID de la carrera: ");
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + "\t" + listaParticipantes.size();
     }
 
 }

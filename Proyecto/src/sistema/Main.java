@@ -8,49 +8,52 @@ import java.util.Scanner;
 
 
 public class Main {
+
     public static void main(String[] args) {
         Sistema sistema = Sistema.getInstance();
         Scanner sc = sistema.getScanner();
+        sistema.inicializar();
         Competencia[] tipos = new Competencia[3];
         tipos[0] = new Carrera5K();
         tipos[1] = new CompetenciaBanda();
         tipos[2] = new TorneoVideojuego();
-        
+        Competencia tipoActual = null;
+
         int opcion;
-        do{
+        do {
             sistema.presentarSistema();
             opcion = sc.nextInt();
             sc.nextLine();
             System.out.println("");
-            if (opcion != 4) {
-                
-            }
-            switch(opcion) {
+            switch (opcion) {
                 case 1:
-                    sistema.cambiarTipo(tipos[0]);
+                    tipoActual = tipos[0];
+                    sistema.cambiarTipo(tipoActual);
                     break;
                 case 2:
-                    sistema.cambiarTipo(tipos[1]);
+                    tipoActual = tipos[1];
+                    sistema.cambiarTipo(tipoActual);
                     break;
                 case 3:
-                    sistema.cambiarTipo(tipos[2]);
+                    tipoActual = tipos[2];
+                    sistema.cambiarTipo(tipoActual);
                     break;
                 case 4:
                     break;
                 default:
                     System.out.println("Elige una opción correcta");
             }
-            
+
             if (opcion > 0 && opcion < 4) {
                 int opcionSeccion;
-                do{
+                do {
                     sistema.presentarMenuSeccion();
                     opcionSeccion = Integer.parseInt(sc.nextLine());
                     System.out.println("");
                     Competencia actual;
                     String id;
-                    
-                    switch(opcionSeccion) {
+
+                    switch (opcionSeccion) {
                         case 1:
                             sistema.opcionUno();
                             break;
@@ -58,20 +61,20 @@ public class Main {
                             sistema.opcionDos();
                             id = sc.nextLine();
                             actual = sistema.buscarCompetencia(id);
-                            if (actual != null) {
+                            if (actual != null && tipoActual != null && tipoActual.getClass() == actual.getClass()) {
                                 sistema.registrarParticipantes(actual);
                             } else {
-                                System.out.println("Id de carrera no existe");
+                                System.out.println("Id de competencia no existe");
                             }
                             break;
                         case 3:
                             sistema.opcionTres();
-                             id = sc.nextLine();
+                            id = sc.nextLine();
                             actual = sistema.buscarCompetencia(id);
-                            if (actual != null) {
+                            if (actual != null && tipoActual != null && tipoActual.getClass() == actual.getClass()) {
                                 sistema.registrarGanadores(actual);
                             } else {
-                                System.out.println("Id de carrera no existe");
+                                System.out.println("Id de competencia no existe o funcion no aplica implementación");
                             }
                             break;
                         case 4:
@@ -81,7 +84,7 @@ public class Main {
                     }
                 } while (opcionSeccion != 4);
             }
-            
+
         } while (opcion != 4);
         sc.close();
     }
