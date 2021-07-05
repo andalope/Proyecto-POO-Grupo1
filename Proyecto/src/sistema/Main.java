@@ -1,5 +1,5 @@
 package sistema;
-
+// importa los paquetes con las clases 
 import eventos.Carrera5K;
 import eventos.Competencia;
 import eventos.CompetenciaBanda;

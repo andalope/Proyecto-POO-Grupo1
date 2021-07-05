@@ -41,7 +41,7 @@ public class Carrera5K extends Competencia {
         System.out.print("Escoge una opcion: ");
     }
 
-//Método que registrar participantes que quieran participar en Carreras5K
+//Método que registra participantes que quieran participar en Carreras5K
     @Override
     public void registarParticipante() {
         if (terminado) {//Si la carrera está cerrada no permite el ingreso de más participantes
