@@ -24,28 +24,29 @@ public class Sistema {
 
     private ArrayList<Estudiante> listaEstudiante;
     private ArrayList<Competencia> listaCompetencia;
-
+//Se crea lista de estudiante y competencia y se llama al scanner
     private Sistema() {
         ultimoIdCompetencia = 1;
         listaEstudiante = new ArrayList<>();
         listaCompetencia = new ArrayList<>();
         sc = new Scanner(System.in);
     }
-
+//Crea sistema para que el programa no se caiga 
     public static Sistema getInstance() {
         if (sistema == null) {
             sistema = new Sistema();
         } 
         return sistema;
     }
-
+//Inicializa el sistema empleando la información del archivo de datos y crea objetos pertinentes para el funcionamiento del programa
     public void inicializar() {
         Reader rd = new Reader();
         listaEstudiante = rd.cargarEstudiantes();
         String[] premios = new String[3];
         for (int i = 0; i < premios.length; i++) {
-            premios[i] = "Se va a otorgar una medalla y $" + 50*(i+1);
+            premios[i] = "Se va a otorgar una medalla y $" + 50*(i+1);//Se crea el respectivo premio para la competencia 
         }
+        //Generador de carrera y respectivos participantes de carrera (Incluye parámetro que indica si la carrea está cerrada o no)
         Competencia c1 = new Carrera5K(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios, true);
         c1.addParticipante(new Participante5K(buscarEstudiante("202002028")));
         c1.addParticipante(new Participante5K(buscarEstudiante("201811411")));
@@ -53,7 +54,7 @@ public class Sistema {
         c1.addParticipante(new Participante5K(buscarEstudiante("200900850")));
         c1.addParticipante(new Participante5K(buscarEstudiante("202007290")));
         c1.addParticipante(new Participante5K(buscarEstudiante("201812302")));
-        
+        //Generador de carrera y respectivos participantes de carrera
         Competencia c2 = new Carrera5K(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios);
         c2.addParticipante(new Participante5K(buscarEstudiante("202002028")));
         c2.addParticipante(new Participante5K(buscarEstudiante("201811411")));
@@ -106,11 +107,11 @@ public class Sistema {
         listaCompetencia.add(c5);
         listaCompetencia.add(c6);
     }
-
+//Crea Id de competencias
     public String generarIdCompetencia() {
         return "C-" + ultimoIdCompetencia++;
     }
-    
+//Crea Id de bandas    
     public String generarIdBanda() {
         return "B-" + ultimoIdBanda++;
     }
@@ -118,7 +119,7 @@ public class Sistema {
     public void cambiarTipo(Competencia c) {
         tipo = c;
     }
-
+//Se crea el menú que se va a mostrar al usuario para que conozca las opciones
     public void presentarSistema() {
         System.out.println("-------Sistema de control de Competencias-------");
         System.out.println("1. Carrera 5K");

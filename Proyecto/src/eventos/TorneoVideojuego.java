@@ -24,10 +24,10 @@ public class TorneoVideojuego extends Competencia{
 // Metodo que registra los participantes en el torneo
     @Override
     public void registarParticipante() {
-        if (terminado) {// No se permiten mas participantes con la carrera creada
-            System.out.println("Torneo cerrada, no se pueden registrar más estudiantes");
+        if (terminado) {// Si ya cerró, no se permiten mas participantes en el torneo 
+            System.out.println("Torneo cerrado, no se pueden registrar más estudiantes");
             System.out.println("");
-        } else {// admite participantes si la carrera aun no empieza
+        } else {// Si aún no cierra, admite participantes en el torneo 
             System.out.println("Registro de participantes en torneo " + nombreVideojuego);
             String id;
             do {
@@ -48,15 +48,14 @@ public class TorneoVideojuego extends Competencia{
             } while (!id.equals("0"));
         }
     }
-    // metodo que registra los ganadores en eltorneo
-    
-
+    // metodo que registra los ganadores del torneo
+  
     @Override
     public void registrarGanadores() {
-       if (terminado) {//Si la carrera ya ha finalizado imprime mensaje y no permite modificaciones
+       if (terminado) {//Si el torneo ya ha finalizado imprime mensaje y no permite modificaciones
             System.out.println("Torneo cerrado, no se pueden modificar los ganadores");
             System.out.println("");
-        } else if (listaParticipantes.size() >= 3) {//Si la lista de participantes inscritos es mayor y igual a 3 entra al ciclo while
+        } else if (listaParticipantes.size() >= 3) {//Si la lista de participantes inscritos es mayor o igual a 3 entra al ciclo while
             int i = 0;
             do {
                 System.out.println("Ingreso del puesto N°" + (i + 1));//Va registrando los ganadores en su posición respectiva
@@ -71,11 +70,11 @@ public class TorneoVideojuego extends Competencia{
                 } else {
                     System.out.println("Estudiante " + e + " ganador");
                     System.out.println("");
-                    ganadores[i] = e;//Si el ID es válido, se registra el tiempo que realizó cada uno de los miembros del podio
+                    ganadores[i] = e;//Si el ID es válido se registra al ganador
                     i++;
                 }
             } while (i < 3);//Si hay menos de 3 participantes no se realiza la premiación por falta de participantes
-            terminado = true;
+            terminado = true;//Se registra el torneo como cerrado para que no pueda ser modificado 
         } else {
             System.out.println("No hay suficientes participantes registrados");
             System.out.println("");

@@ -78,7 +78,7 @@ public class Carrera5K extends Competencia {
         if (terminado) {//Si la carrera ya ha finalizado imprime mensaje y no permite modificaciones
             System.out.println("Carrera cerrada, no se pueden modificar los ganadores");
             System.out.println("");
-        } else if (listaParticipantes.size() >= 3) {//Si la lista de participantes inscritos es mayor y igual a 3 entra al ciclo while
+        } else if (listaParticipantes.size() >= 3) {//Si la lista de participantes inscritos es mayor o igual a 3 entra al ciclo while
             int i = 0;
             do {
                 System.out.println("Ingreso del puesto N°" + (i + 1));//Va registrando los ganadores en su posición respectiva
