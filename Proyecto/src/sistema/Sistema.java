@@ -62,11 +62,13 @@ public class Sistema {
         c2.addParticipante(new Participante5K(buscarEstudiante("200900850")));
         c2.addParticipante(new Participante5K(buscarEstudiante("202007290")));
         
+        //creacion de la lista de Jurados con miembros por defecto
         Jurado[] lista = new Jurado[3];
         lista[0] = new Jurado("1", "Jose", "Sin Bio");
         lista[1] = new Jurado("2", "Juan", "Sin Bio");
         lista[2] = new Jurado("3", "Jaime", "Sin Bio");
         
+        //creacion de bandas con integrantes por defecto
         IntegranteBanda[] intBanda1 = new IntegranteBanda[2];
         intBanda1[0] = new IntegranteBanda(buscarEstudiante("202007290"), GUITARRISTA);
         intBanda1[1] = new IntegranteBanda(buscarEstudiante("201811411"), OTRO);
@@ -77,6 +79,7 @@ public class Sistema {
         intBanda2[1] = new IntegranteBanda(buscarEstudiante("201811411"), GUITARRISTA);
         Banda b2 = new Banda(generarIdBanda(), "Don Medardo y su orquesta", "Cumbia chonera", intBanda2);
         
+       //creacion de competencias de banda por defecto y de videojuegos 
         Competencia c3 = new CompetenciaBanda(generarIdCompetencia(), LocalDate.now(), LocalTime.now(), premios, lista, true);
         c3.addParticipante(b1);
         c3.addParticipante(b2);
